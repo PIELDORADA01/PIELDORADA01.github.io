@@ -3,135 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><span style="font-style: italic; color: #e91e63; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Isla Piel Dorada</span></title>
+    <title>Control de vehículos DGA</title>
     <style>
         body {
-            background-color: #000000; /* Fondo negro */
-            color: #FFFFFF; /* Fuentes blancas */
-            font-family: 'Times New Roman', serif;
-            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            animation: fadeIn 1s ease-out; /* Animación de entrada */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        h1 {
+            color: #00bcd4;
+            font-weight: bold;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        #content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
             padding: 20px;
         }
-        h1, p, li, h2 {
-            font-style: italic;
-            color: #FFFFFF;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
-            margin-bottom: 20px; /* Espacio entre secciones */
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra suave */
-            transition: transform 0.3s ease-in-out; /* Transición en hover */
-            margin-bottom: 20px; /* Espacio entre imágenes */
-        }
-        img:hover {
-            transform: scale(1.05); /* Aumento en hover */
-        }
-        .carousel {
+        #inputSection {
+            flex: 1;
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            margin-bottom: 20px; /* Espacio entre carruseles */
+            flex-direction: column;
+            align-items: center;
         }
-        .carousel img {
-            scroll-snap-align: center;
-            flex: none;
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Sombra suave */
-            transition: transform 0.3s ease-in-out; /* Transición en hover */
-            margin-right: 10px; /* Espacio entre imágenes del carrusel */
+        #inputDisplay {
+            width: 80%;
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px solid #00bcd4;
+            border-radius: 10px;
+            color: #000;
+            background-color: #fff;
         }
-        .carousel img:last-child {
-            margin-right: 0;
-        }
-        .carousel::-webkit-scrollbar {
-            display: none;
-        }
-        .services {
+        #numberList {
+            flex: 1;
+            list-style: none;
+            padding: 0;
             text-align: left;
-            margin-bottom: 20px; /* Espacio entre secciones */
+            width: 30%;
+            max-width: 400px;
+            margin-top: 20px;
+            background-color: #e0f7fa;
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 60vh;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: #e91e63; /* Rosa intenso */
-            color: white;
-            text-decoration: none;
+        #numberList li {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #fff;
             border-radius: 5px;
-            transition: background-color 0.3s ease-in-out; /* Transición de color */
+            font-size: 1.2em;
+            border-left: 5px solid #00bcd4;
         }
-        .button:hover {
-            background-color: #c2185b; /* Color más oscuro en hover */
+        .keyboard {
+            width: 200px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-self: flex-end;
+            margin-bottom: 20px;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .keyboard button {
+            padding: 15px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            background-color: #00bcd4;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .keyboard button:hover {
+            background-color: #0097a7;
+        }
+        #voiceButton,
+        #addButton {
+            margin-top: 10px;
+            padding: 15px 0;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff5722;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        #voiceButton:hover {
+            background-color: #e64a19;
+        }
+        #addButton {
+            background-color: #4caf50;
+        }
+        #addButton:hover {
+            background-color: #388e3c;
+        }
+        #exportButton {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff9800;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: center;
+        }
+        #exportButton:hover {
+            background-color: #f57c00;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://i.postimg.cc/43RsVCqh/IMG-20240706-WA0009.jpg" alt="Logo del hotel Isla Piel Dorada">
+    <h1>Control de vehículos DGA</h1>
+    <h2>plataforma creada por Javier Astaroth</h2>
 
-        <h1>Isla Piel Dorada</h1>
-        <p>Bienvenido a Isla Piel Dorada, un paraíso escondido en las isletas de Granada, Nicaragua. Disfruta de una experiencia única en cabañas frente al lago y con vistas al majestuoso volcán Mombacho. Ven y descubre el lujo y la serenidad en cada rincón de nuestra isla.</p>
+    <div id="content">
+        <ul id="numberList"></ul>
 
-        <h2>Video</h2>
-        <iframe width="800" height="450" src="https://www.youtube.com/embed/GcUBnhc-zLo?autoplay=1&loop=1&playlist=GcUBnhc-zLo&controls=0&mute=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-        <h2>Destinos Destacados</h2>
-        <div class="carousel">
-            <img src="https://i.postimg.cc/0jjsP9Mh/IMG-20240706-WA0000.jpg" alt="Destino 1">
-            <img src="https://i.postimg.cc/t4WHXSJR/IMG-20240706-WA0001.jpg" alt="Destino 2">
-            <img src="https://i.postimg.cc/X7Tb6SVD/IMG-20240706-WA0002.jpg" alt="Destino 3">
-            <img src="https://i.postimg.cc/CLZg2LVq/IMG-20240706-WA0003.jpg" alt="Destino 4">
-            <img src="https://i.postimg.cc/zD2NpH4N/IMG-20240706-WA0004.jpg" alt="Destino 5">
-            <img src="https://i.postimg.cc/C52VK9b5/IMG-20240706-WA0005.jpg" alt="Destino 6">
-            <img src="https://i.postimg.cc/zfw5ktY2/IMG-20240706-WA0006.jpg" alt="Destino 7">
-            <img src="https://i.postimg.cc/hjSnZLSD/IMG-20240706-WA0007.jpg" alt="Destino 8">
-            <img src="https://i.postimg.cc/mD8svPDQ/IMG-20240706-WA0008.jpg" alt="Destino 9">
+        <div id="inputSection">
+            <div id="inputDisplay">0000</div>
         </div>
 
-        <h2>Servicios</h2>
-        <ul class="services">
-            <li><strong>Hospedaje en las isletas de Granada:</strong> Bella isla con cabañas frente al lago y al volcán Mombacho.</li>
-            <li><strong>Paquete Hospedaje Incluye:</strong></li>
-            <ul>
-                <li>Transporte en lancha.</li>
-                <li>Hospedaje en la isla Piel Dorada.</li>
-                <li>Desayuno, almuerzo y cena.</li>
-                <li>Bebidas durante las comidas.</li>
-            </ul>
-            <li>Precio: <strong>$78 USD por persona</strong></li>
-            <li><strong>Horarios:</strong></li>
-            <ul>
-                <li>Check-in: 2 pm</li>
-                <li>Check-out: 12 pm del día siguiente.</li>
-            </ul>
-            <li><strong>Instalaciones:</strong> Piscina, bar, TV por cable, y kayaks para explorar las isletas.</li>
-            <li>Descubre el paraíso en cada rincón, donde cada detalle está diseñado para tu confort y deleite.</li>
-        </ul>
+        <div>
+            <div class="keyboard">
+                <button onclick="enterNumber('1')">1</button>
+                <button onclick="enterNumber('2')">2</button>
+                <button onclick="enterNumber('3')">3</button>
+                <button onclick="enterNumber('4')">4</button>
+                <button onclick="enterNumber('5')">5</button>
+                <button onclick="enterNumber('6')">6</button>
+                <button onclick="enterNumber('7')">7</button>
+                <button onclick="enterNumber('8')">8</button>
+                <button onclick="enterNumber('9')">9</button>
+                <button onclick="clearInput()">C</button>
+                <button onclick="enterNumber('0')">0</button>
+                <button onclick="removeLast()">←</button>
+            </div>
 
-        <a class="button" href="https://wa.me/50587685045" target="_blank">Contáctanos</a>
-        <a class="button" href="https://maps.app.goo.gl/E6xgBatRrZAYjKVx6" target="_blank">Ver Ubicación</a>
+            <button id="voiceButton" onclick="startVoiceInput()">Dictar por voz</button>
+            <button id="addButton" onclick="addToList()">Agregar</button>
+        </div>
     </div>
+
+    <button id="exportButton" onclick="exportList()">Exportar lista</button>
+
+    <script>
+        let input = '';
+
+        function enterNumber(num) {
+            if (input.length < 4) {
+                input += num;
+                updateDisplay();
+            }
+        }
+
+        function clearInput() {
+            input = '';
+            updateDisplay();
+        }
+
+        function removeLast() {
+            input = input.slice(0, -1);
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('inputDisplay').innerText = input.padStart(4, '0');
+        }
+
+        function addToList() {
+            if (input.length === 4) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${document.getElementById('numberList').children.length + 1}. ${input}`;
+                document.getElementById('numberList').appendChild(listItem);
+                clearInput();
+            } else {
+                alert('Por favor ingresa 4 dígitos.');
+            }
+        }
+
+        function exportList() {
+            const listItems = document.getElementById('numberList').children;
+            let listContent = 'Lista de números:\n';
+            for (let i = 0; i < listItems.length; i++) {
+                listContent += listItems[i].textContent + '\n';
+            }
+            const phoneNumber = '+50577693150';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(listContent)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function startVoiceInput() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'es-ES';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const voiceInput = event.results[0][0].transcript;
+                const numbers = voiceInput.replace(/\D/g, ''); // Remover todo excepto números
+                input = numbers.slice(0, 4); // Tomar solo los primeros 4 números
+                updateDisplay();
+            };
+
+            recognition.onspeechend = function() {
+                recognition.stop();
+            };
+
+            recognition.onerror = function(event) {
+                alert('Error en el reconocimiento de voz: ' + event.error);
+            };
+        }
+    </script>
 </body>
 </html>
